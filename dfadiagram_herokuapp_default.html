@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" content="user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1,width=device-width">
+  <style>
+    body {
+      padding: 0;
+      margin: 0;
+    }
+
+    .nav-link:hover {
+      background: rgb(186, 186, 186);
+
+      color: red;
+    }
+
+    #parent {
+      overflow: auto;
+      width:1200px;
+      height:600px;
+    }
+  </style>
+  <link rel="stylesheet" href="assets/main.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+
+
+</head>
+
+<body>
+
+  <div class="" style="height:50px;">
+
+  </div>
+
+  <div class="modal fade " id="modal-1">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">DFA</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            <span class="sr-only">Close</span>
+          </button>
+
+        </div>
+        <div class="modal-body">
+          <div class="container">
+            <h6>Please seperate multiple values by comma</h6>
+            <div class="form-group row">
+              <label for="state" class="col-3">State: </label>
+              <input type="text" data-name="state" value="1,2,3" id="state" class="form-control col-9">
+            </div>
+
+            <div class="form-group row">
+              <label for="alphabet" class="col-3">Alphabet: </label>
+              <input type="text" data-name="alphabet" value="1,2,3" id="alphabet" class="form-control col-9">
+            </div>
+
+            <div class="form-group row">
+              <label for="initial" class="col-3">Initial State: </label>
+              <input type="text" data-name="initial" value="a,b,c" id="initial" class="form-control col-9">
+            </div>
+
+            <div class="form-group row">
+              <label for="final" class="col-3">Final State: </label>
+              <input type="text" data-name="final" value="1,2,3" id="final" class="form-control col-9">
+            </div>
+            <label>Transition: </label>
+            <table class="table table-responsive">
+              <thead>
+                <tr>
+                  <th>Q\&Sigma;</th>
+                </tr>
+              </thead>
+              <tbody>
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" id="save">Save changes</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+  <!-- /.modal -->
+
+
+
+
+  <div class="modal fade" id="modal-2">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Input </h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+          <span class="sr-only">Close</span>
+        </button>
+
+        </div>
+        <div class="modal-body">
+          <div class="container">
+            <h6>Please Enter an input to test the DFA</h6>
+            <div class="form-group row">
+              <label for="dfaInput" class="col-3">Input:</label>
+              <input type="text" id="dfaInput" placeholder="Input" class="form-control col-9">
+
+            </div>
+            <div class="form-group row">
+              <label for="dfaInterval" class="col-3">Traversing speed</label>
+              <input type="number" id="dfaInterval" placeholder="Time in milliseconds < 2000" class="form-control col-9" min="1" max="2000" >
+
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success" id="check">Check</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+  <!-- /.modal -->
+
+
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <a class="navbar-brand" href="dfadiagram_herokuapp_default.html#">DFA</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" id="navCollapseBut">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <button class="btn   btn-outline-primary" data-toggle="modal" data-target="#modal-1" id="modalBut">DFA Settings</button>
+        <button class="btn  btn-outline-success" type="button" data-toggle="modal" data-target="#modal-2" id="inputBut">Input</button>
+      </ul>
+    </div>
+
+  </nav>
+
+
+
+
+
+
+
+
+
+
+
+  <div id="parent"></div>
+  <!--  Alert`-->
+  <div class="alert alert-danger  fixed-bottom" style="display:none;" role="alert" id="reject">
+    <strong>REJECED!</strong> The string is not accepted by the DFA!
+    <button type="button" class="close"  >
+    <span aria-hidden="true">&times;</span>
+  </button>
+  </div>
+
+  <div class="alert alert-success fixed-bottom" style="display:none;" role="alert" id="accept">
+    <strong>ACCEPTED!</strong> The string is accepted by the DFA!
+    <button type="button" class="close"  >
+    <span aria-hidden="true">&times;</span>
+  </button>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+  <script src="assets/p5.min.js"></script>
+  <script src="assets/addons/p5.dom.min.js"></script>
+  <script src="assets/addons/p5.sound.min.js"></script>
+  <script src="assets/Class/DFA/DFA.js"></script>
+  <script src="assets/Class/Graphics/StateCircle.js"></script>
+  <script src="assets/Class/Graphics/GraphicsItem.js"></script>
+  <script src="assets/Class/Graphics/curves.js"></script>
+  <script src="assets/Class/Graphics/StateArc.js"></script>
+  <script src="assets/Class/DFA/DFADrawer.js"></script>
+  <script src="assets/Class/DFA/DFAChecker.js"></script>
+  <script src="assets/Sketch/DFA/sketch.js"></script>
+
+  <script src="assets/Backend/DFASettingsHandler.js">
+  </script>
+  <script src="assets/Backend/InputHandler.js">
+  </script>
+</body>
+
+</html>
